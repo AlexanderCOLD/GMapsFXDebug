@@ -31,6 +31,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
+        SingleMap.keyAPI = args[0].trim();
+
         new Thread(() -> {
 
             /* Добавление элементов */

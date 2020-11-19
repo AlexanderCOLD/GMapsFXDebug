@@ -15,6 +15,7 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import lombok.Getter;
+import lombok.Setter;
 import netscape.javascript.JSObject;
 
 import java.util.HashMap;
@@ -29,8 +30,10 @@ import java.util.Locale;
 @Getter
 public class SingleMap implements MapComponentInitializedListener {
 
-    private final GoogleMapView mapComponent = new GoogleMapView(Locale.getDefault().getLanguage(), "");
-    protected GoogleMap map;
+    public static String keyAPI = "";
+
+    private GoogleMapView mapComponent;
+    private GoogleMap map;
 
     private final Button btnZoomIn = new Button("Zoom In");
     private final Button btnZoomOut = new Button("Zoom Out");
@@ -48,6 +51,8 @@ public class SingleMap implements MapComponentInitializedListener {
 
 
     public void initialize(final Stage stage) {
+        System.out.println("Applied API:  " + keyAPI);
+        mapComponent = new GoogleMapView(Locale.getDefault().getLanguage(), keyAPI);
         mapComponent.addMapInitializedListener(this);
 
         btnZoomIn.setOnAction(e -> { map.zoomProperty().set(map.getZoom() + 1); });
@@ -174,4 +179,5 @@ public class SingleMap implements MapComponentInitializedListener {
             lines.values().forEach(MapLine::remove);
         });
     }
+
 }
